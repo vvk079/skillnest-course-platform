@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Clock, User, ArrowRight, Star } from 'lucide-react';
 
+const API = import.meta.env.VITE_API_URL;
+
 const CourseCard = ({ course }) => {
     const { id, title, instructor, duration, price, thumbnail, image, category } = course;
-    const displayImage = image || thumbnail;
+    const displayImage = image ? (image.startsWith('http') ? image : `${API}${image}`) : thumbnail;
 
     return (
         <div className="group bg-white rounded-[2rem] border border-slate-200 overflow-hidden hover:shadow-[0_20px_50px_rgba(99,102,241,0.12)] hover:-translate-y-2 transition-all duration-500 ease-out">

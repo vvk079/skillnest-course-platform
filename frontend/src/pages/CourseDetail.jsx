@@ -152,7 +152,7 @@ const CourseDetail = () => {
                         {/* Course Video Preview */}
                         <div className="relative aspect-video rounded-[3.5rem] overflow-hidden group shadow-2xl">
                             <img
-                                src={`${API}${course.image}`}
+                                src={course.image?.startsWith('http') ? course.image : `${API}${course.image}`}
                                 alt={course.title}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                             />

@@ -39,7 +39,7 @@ const getCourseById = async (req, res) => {
 // @access  Private/Admin
 const createCourse = async (req, res) => {
     const { title, description, instructor, duration, price, category } = req.body;
-    const image = req.file ? `/uploads/${req.file.filename}` : '';
+    const image = req.file ? req.file.path : '';
 
     try {
         const course = new Course({
@@ -65,7 +65,7 @@ const createCourse = async (req, res) => {
 // @access  Private/Admin
 const updateCourse = async (req, res) => {
     const { title, description, instructor, duration, price, category } = req.body;
-    const image = req.file ? `/uploads/${req.file.filename}` : undefined;
+    const image = req.file ? req.file.path : undefined;
 
     try {
         const course = await Course.findById(req.params.id);
