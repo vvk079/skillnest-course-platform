@@ -2,7 +2,9 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
+
 import { Clock, User, Users, CheckCircle2, Share2, Heart, ShieldCheck, ChevronLeft, Loader2, ArrowRight, PlayCircle, Star, Calendar, Globe, BookOpen } from 'lucide-react';
+const API = import.meta.env.VITE_API_URL;
 
 const CourseDetail = () => {
     const { id } = useParams();
@@ -150,7 +152,7 @@ const CourseDetail = () => {
                         {/* Course Video Preview */}
                         <div className="relative aspect-video rounded-[3.5rem] overflow-hidden group shadow-2xl">
                             <img
-                                src={course.image || course.thumbnail}
+                                src={`${API}${course.image}`}
                                 alt={course.title}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                             />
