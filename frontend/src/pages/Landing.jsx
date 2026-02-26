@@ -3,8 +3,10 @@ import api from '../services/api';
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, Users, Award, PlayCircle, Loader2 } from 'lucide-react';
 import CourseCard from '../components/CourseCard';
+import { useAuth } from '../context/AuthContext';
 
 const Landing = () => {
+    const { isAuthenticated } = useAuth();
     const [featuredCourses, setFeaturedCourses] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -54,9 +56,11 @@ const Landing = () => {
                         </p>
 
                         <div className="flex flex-wrap items-center gap-4 mt-8 max-md:justify-center">
-                            <Link to="/register" className="px-10 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg shadow-xl shadow-indigo-600/20 active:scale-95 transition-all">
-                                Get Started
-                            </Link>
+                            {!isAuthenticated && (
+                                <Link to="/register" className="px-10 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg shadow-xl shadow-indigo-600/20 active:scale-95 transition-all">
+                                    Get Started
+                                </Link>
+                            )}
                             <Link to="/courses" className="px-8 py-4 rounded-2xl bg-white text-indigo-600 border-2 border-indigo-100 flex items-center gap-2 hover:bg-indigo-50 active:scale-95 transition-all font-bold text-lg shadow-lg">
                                 <span>Our courses</span>
                                 <ArrowRight size={20} />
@@ -156,12 +160,14 @@ const Landing = () => {
                             Join thousands of students building their futures on SkillNest. Start your learning path today and get hired by world-class companies.
                         </p>
                         <div className="flex flex-wrap justify-center gap-6">
-                            <Link
-                                to="/register"
-                                className="px-12 py-5 bg-white text-slate-900 text-xl font-bold rounded-[2rem] hover:bg-indigo-50 hover:scale-105 transition-all shadow-2xl"
-                            >
-                                Get Started for Free
-                            </Link>
+                            {!isAuthenticated && (
+                                <Link
+                                    to="/register"
+                                    className="px-12 py-5 bg-white text-slate-900 text-xl font-bold rounded-[2rem] hover:bg-indigo-50 hover:scale-105 transition-all shadow-2xl"
+                                >
+                                    Get Started for Free
+                                </Link>
+                            )}
                             <Link
                                 to="/courses"
                                 className="px-12 py-5 bg-slate-800 text-white text-xl font-bold rounded-[2rem] border border-slate-700 hover:bg-slate-700 transition-all shadow-xl"
